@@ -40,3 +40,15 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+/* styles for navbar*/
+.rebekahs-favorite-color{
+    color: white;
+    background-color: darkgreen;
+}
+
+/* styles for buttons */
+.btn-default {
+    color: white;
+    background-color: darkgreen;
+}
