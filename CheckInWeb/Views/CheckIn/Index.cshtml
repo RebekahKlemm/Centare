@@ -1,0 +1,24 @@
+﻿@model CheckInWeb.Models.MyCheckInViewModel
+@{
+    ViewBag.Title = "My Check Ins";
+}
+
+<h2>My Latest Check Ins</h2>
+
+<ul data-bind="foreach: checkInPage">
+    <li>
+        <strong data-bind="text: Location"></strong> -
+        <small data-bind="text: moment(Time).format('LLLL')"></small>
+    </li>
+</ul>
+
+<h3 data-bind="visible: checkIns().length == 0">
+    You have not checked in at any locations yet.
+</h3>
+
+<script src="~/Scripts/moment.js"></script>
+<script src="~/Scripts/knockout-3.3.0.js"></script>
+<script src="~/Scripts/MyCheckInViewModel.js"></script>
+<script type="text/javascript">
+    ko.applyBindings(new MyCheckInViewModel(@Html.Raw(Json.Encode(Model))));
+</script>

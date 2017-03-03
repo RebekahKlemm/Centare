@@ -1,0 +1,21 @@
+﻿@model CheckInWeb.Models.LocationIndexViewModel
+@{
+    ViewBag.Title = "Locations";
+}
+
+<h2>Locations</h2>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Check In</th>
+    </tr>
+    @foreach (var location in Model.Locations)
+    {
+    <tr>
+        <td>@location.Name</td>
+        <td>@Html.ActionLink("Check In", "Here", "CheckIn", new { locationId = location.Id }, new { @class = "btn" })</td>
+    </tr>
+    }
+</table>
+

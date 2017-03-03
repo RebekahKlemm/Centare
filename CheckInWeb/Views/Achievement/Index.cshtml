@@ -1,0 +1,21 @@
+﻿@using CheckInWeb.Data.Entities
+
+@{
+    ViewBag.Title = "My Achievements";
+}
+
+<h2>My Achievements</h2>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Time Awarded</th>
+    </tr>
+    @foreach (var achievement in ViewBag.Achievements)
+    {
+        <tr>
+            <td>@Enum.GetName(typeof(AchievementType), achievement.Type)</td>
+            <td>@achievement.TimeAwarded</td>
+        </tr>
+    }
+</table>
