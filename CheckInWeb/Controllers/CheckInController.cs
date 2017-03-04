@@ -100,6 +100,26 @@ namespace CheckInWeb.Controllers
                 repository.Insert(allLocations);
             }
 
+            // check in together?
+            if (!allAchievements.Any(a => a.Type == AchievementType.CheckInTogether)){
+                var allCheckinIds = repository.Query<CheckIn>().Select(c => c.Id);
+                foreach (var checkInId in allCheckinIds)
+                {
+                    var currentCheckIn = repository.Query<CheckIn>().SingleOrDefault(c => c.Id == checkInId);
+                    var withinHour = DateTime.Now.AddHours(-1);
+                    if (currentCheckIn.Time > withinHour && currentCheckIn.Location == location && currentCheckIn.User != user)
+                    {
+                        //award the current user the Achievement
+                        var checkInTogetherUser = new Achievement { Type = AchievementType.CheckInTogether, User = user, TimeAwarded = DateTime.Now };
+                        repository.Insert(checkInTogetherUser);
+                        //award the friend the Achievement
+                        var friendUser = repository.Query<ApplicationUser>().SingleOrDefault(u => u.Id == currentCheckIn.User.Id);
+                        var checkInTogetherFriend = new Achievement { Type = AchievementType.CheckInTogether, User = friendUser, TimeAwarded = DateTime.Now };
+                        repository.Insert(checkInTogetherFriend);
+                    }
+                }
+            }
+
             // some day we'll have hundreds of achievements!
 
             repository.SaveChanges();

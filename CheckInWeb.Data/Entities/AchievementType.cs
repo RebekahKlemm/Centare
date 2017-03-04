@@ -3,6 +3,7 @@
     public enum AchievementType
     {
         AllLocations = 1,
-        TwoInOneDay = 2
+        TwoInOneDay = 2,
+        CheckInTogether = 3
     }
 }
